@@ -16,7 +16,7 @@ def load_lung_cancer_model():
     Menggunakan st.cache_resource agar proses load hanya dilakukan sekali.
     """
     try:
-        model = load_model('lung_cancer_model.h5')
+        model = load_model('lung_cancer.h5')
         return model
     except Exception as e:
         st.error(f"Gagal memuat model: {e}")
