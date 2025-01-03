@@ -5,6 +5,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input  # Sesuaikan jika model Anda berbeda
 from PIL import Image
+import os
 
 # -------------------------------------------
 # 1. Load model (dengan caching agar tidak re-load setiap ada interaksi)
@@ -15,8 +16,12 @@ def load_lung_cancer_model():
     Fungsi untuk memuat model lung cancer.
     Menggunakan st.cache_resource agar proses load hanya dilakukan sekali.
     """
+    model_path = 'lung_cancer_model.h5'  # Pastikan path ini benar
+    if not os.path.exists(model_path):
+        st.error(f"Gagal memuat model: File tidak ditemukan di path {model_path}")
+        return None
     try:
-        model = load_model('lung_cancer_model.h5')
+        model = load_model(model_path)
         return model
     except Exception as e:
         st.error(f"Gagal memuat model: {e}")
